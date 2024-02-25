@@ -2,14 +2,17 @@
   "compilerOptions": {
     "module": "ESNext",
     "declaration": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "outDir": "dist",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": true,
     "esModuleInterop": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

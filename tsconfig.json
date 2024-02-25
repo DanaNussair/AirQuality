@@ -8,7 +8,8 @@
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": true,
-    "target": "ES6"
+    "esModuleInterop": true,
+    "target": "ESNext"
   },
   "include": ["src"]
 }

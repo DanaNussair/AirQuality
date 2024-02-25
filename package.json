@@ -40,8 +40,6 @@
   },
   "homepage": "https://github.com/DanaNussair/AirQuality#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.23.9",
-    "@babel/register": "^7.23.7",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.20",
     "@types/validator": "^13.11.9",
@@ -57,7 +55,6 @@
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }
 }

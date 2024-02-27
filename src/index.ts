@@ -1,5 +1,5 @@
 import express from 'express'
-import { sequelize } from './db/models'
+import { sequelize } from './db/connection'
 
 const app = express()
 const port = process.env.PORT || 3000

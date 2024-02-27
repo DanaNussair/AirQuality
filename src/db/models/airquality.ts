@@ -1,49 +1,34 @@
-import { Model } from "sequelize";
-import { AllowNull, AutoIncrement, Column, DataType, PrimaryKey, Unique } from 'sequelize-typescript';
+import { DataTypes, Model } from "sequelize";
 
-export type AirQualityAttributes = {
-    id: number,
-    city: string,
-    ts: string,
-    aqius: number,
-    mainus: string,
-    aqicn: number,
-    maincn: string
+import { sequelize } from "../connection";
+
+class AirQuality extends Model {
+  declare id: number;
+  declare city: string;
+  declare ts: string;
+  declare aqius: number;
+  declare mainus: string;
+  declare aqicn: number;
+  declare maincn: string;
 }
 
-export default class AirQuality
-  extends Model<AirQualityAttributes>
-  implements AirQualityAttributes
-{
-  @AllowNull(false)
-  @PrimaryKey
-  @AutoIncrement
-  @Unique
-  @Column(DataType.INTEGER)
-  id!: number;
+AirQuality.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true,
+    allowNull: false
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  ts: DataTypes.DATE,
+  aqius: DataTypes.INTEGER,
+  mainus: DataTypes.STRING,
+  aqicn: DataTypes.INTEGER,
+  maincn: DataTypes.STRING
+}, { sequelize, modelName: 'air_qualities' })
 
-  @AllowNull(false)
-  @Unique
-  @Column(DataType.STRING)
-  city!: string;
-
-  @AllowNull(true)
-  @Column(DataType.DATE)
-  ts!: string;
-
-  @AllowNull(true)
-  @Column(DataType.INTEGER)
-  aqius!: number;
-
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  mainus!: string;
-
-  @AllowNull(true)
-  @Column(DataType.INTEGER)
-  aqicn!: number;
-
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  maincn!: string;
-}
+export default AirQuality;

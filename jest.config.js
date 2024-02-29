@@ -5,5 +5,9 @@ export default {
   transform: {
     "^.+\\.tsx?$": ['ts-jest', { useESM: true }],
   },
-  setupFilesAfterEnv: ["dotenv/config"],
+  setupFilesAfterEnv: ["dotenv/config", "<rootDir>/jest/setup.js"],
+  verbose: true,
+  moduleNameMapper: {
+    axios: '<rootDir>/src/__mocks__/axios.js',
+  },
 };

@@ -2,6 +2,16 @@ import { DataTypes, Model } from "sequelize";
 
 import { sequelize } from "../connection";
 
+export type AirQualityAttributes = {
+    id: number;
+    city: string;
+    ts: string;
+    aqius: number;
+    mainus: string;
+    aqicn: number;
+    maincn: string;
+};
+
 class AirQuality extends Model {
     declare id: number;
     declare city: string;

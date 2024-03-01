@@ -2,6 +2,16 @@ import { DataTypes, Model } from "sequelize";
 
 import { sequelize } from "../connection";
 
+export type AirQualityAttributes = {
+    id?: number;
+    city?: string;
+    ts?: string;
+    aqius?: number;
+    mainus?: string;
+    aqicn?: number;
+    maincn?: string;
+};
+
 class AirQuality extends Model {
     declare id: number;
     declare city: string;
@@ -33,5 +43,25 @@ AirQuality.init(
     },
     { sequelize, modelName: "air_qualities" },
 );
+
+export const createAirQualityRecord = async (
+    data: AirQualityAttributes,
+): Promise<AirQuality> => {
+    try {
+        const record = AirQuality.build({
+            city: data?.city,
+            ts: data?.ts,
+            aqius: data?.aqius,
+            mainus: data?.mainus,
+            aqicn: data?.aqicn,
+            maincn: data?.maincn,
+        });
+
+        await record.save();
+        return record.get({ plain: true });
+    } catch (error) {
+        throw new Error("Could not create new AirQuality record");
+    }
+};
 
 export default AirQuality;

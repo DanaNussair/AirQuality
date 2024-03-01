@@ -8,7 +8,7 @@ import {
     fetchDataFromAirVisualApi,
 } from "../../controllers/integrations_controller";
 
-const fillParisPollutionData = async (
+export const fillParisPollutionData = async (
     scheduler: ToadScheduler,
 ): Promise<void> => {
     try {

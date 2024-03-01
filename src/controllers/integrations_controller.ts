@@ -34,14 +34,10 @@ export const fetchDataFromAirVisualApi = async (
             params: { ...args, key: AIRVISUAL_API_KEY },
         });
 
-        return response.data?.data;
+        return response.data?.data || {};
     } catch (error) {
         const message = getErrorMessage(error);
-        console.log(
-            "Error occurred while fetching from airvisual api",
-            message,
-        );
 
-        return {};
+        throw new Error(`Failed to fetch data from airvisual api, ${message}`);
     }
 };

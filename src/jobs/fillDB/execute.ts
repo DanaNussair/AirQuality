@@ -1,5 +1,9 @@
 import { callFunction } from "../helpers";
-import * as myModule from "./fillDb";
+import { runFillParisPollutionJob } from "./fillDb";
+
+const myModule = {
+    runFillParisPollutionJob,
+};
 
 const functionName = process.argv[2] as keyof typeof myModule;
 const selectedFunction = myModule[functionName];

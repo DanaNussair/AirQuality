@@ -47,17 +47,21 @@ AirQuality.init(
 export const createAirQualityRecord = async (
     data: AirQualityAttributes,
 ): Promise<AirQuality> => {
-    const record = AirQuality.build({
-        city: data?.city,
-        ts: data?.ts,
-        aqius: data?.aqius,
-        mainus: data?.mainus,
-        aqicn: data?.aqicn,
-        maincn: data?.maincn,
-    });
+    try {
+        const record = AirQuality.build({
+            city: data?.city,
+            ts: data?.ts,
+            aqius: data?.aqius,
+            mainus: data?.mainus,
+            aqicn: data?.aqicn,
+            maincn: data?.maincn,
+        });
 
-    await record.save();
-    return record;
+        await record.save();
+        return record.get({ plain: true });
+    } catch (error) {
+        throw new Error("Could not create new AirQuality record");
+    }
 };
 
 export default AirQuality;

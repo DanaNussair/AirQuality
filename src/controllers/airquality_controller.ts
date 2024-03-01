@@ -1,21 +1,7 @@
 import { Request, Response } from "express";
-import axios from "axios";
 
-const IQ_AIR_API_KEY = process.env.IQ_AIR_API_KEY;
-
-type AirvisualResponse = {
-    data?: {
-        current?: {
-            pollution?: {
-                ts: string;
-                aqius: number;
-                mainus: string;
-                aqicn: number;
-                maincn: string;
-            };
-        };
-    };
-};
+import { getErrorMessage } from "../helpers";
+import { fetchDataFromAirVisualApi } from "./integrations_controller";
 
 export const getPollutionByCoordinates = async (
     req: Request,
@@ -27,18 +13,21 @@ export const getPollutionByCoordinates = async (
         if (!lat || !lon) {
             throw new Error("Latitude and longitude are required.");
         }
+        const latString = typeof lat === "string" ? lat : lat.toString();
+        const lonString = typeof lon === "string" ? lon : lon.toString();
 
-        const airvisualResponse = await axios.get<AirvisualResponse>(
-            `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${IQ_AIR_API_KEY}`,
+        const airvisualResponse = await fetchDataFromAirVisualApi(
+            "nearest_city",
+            { lat: latString, lon: lonString },
         );
 
-        const pollution =
-            airvisualResponse.data?.data?.current?.pollution || {};
+        const pollution = airvisualResponse?.current?.pollution || {};
 
         res.status(200);
         res.send({ results: { pollution } });
     } catch (error) {
-        console.error("Error fetching data:", error);
+        const message = getErrorMessage(error);
+        console.error("Error fetching data:", message);
         res.status(400);
         res.send({
             error: "An error has occurred while fetching data",

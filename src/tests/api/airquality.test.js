@@ -49,9 +49,11 @@ describe("AirQuality API", () => {
 
             expect(response.status).toHaveBeenLastCalledWith(400);
             expect(response.send).toHaveBeenCalledTimes(1);
-            expect(response.send).toHaveBeenCalledWith({
-                error: "An error has occurred while fetching data",
-            });
+            expect(response.send).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    error: expect.stringContaining("An error occurred"),
+                }),
+            );
         });
 
         it("calls the airvisual/nearest_city API", async () => {

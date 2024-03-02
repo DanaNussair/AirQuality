@@ -65,9 +65,24 @@ Response: {
 }
 ```
 
+```
+GET /most_polluted_by_city?city=<CITY>
+
+Response: {
+    "results": {
+        "timestamp": <STRING>
+    }
+}
+```
+
 ## Jobs
 #### - In order to retrieve pollution information and log them in our DB we can run a cronjob dedicated for it which runs every minute once it is started up.
 - #### Retrieve and fill "Paris" data:
 ```
 npm run job:fillDb runFillParisPollutionJob
 ```
+
+## Tests
+You can run either:
+- `npm run test`
+- `npm run test:watch` To run tests in watch mode

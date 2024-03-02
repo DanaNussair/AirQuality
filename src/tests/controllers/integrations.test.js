@@ -29,9 +29,7 @@ describe("integrations controller", () => {
             axios.get.mockRejectedValue(err);
             await expect(
                 fetchDataFromAirVisualApi("city", args),
-            ).rejects.toThrow(
-                "Failed to fetch data from airvisual api, test error",
-            );
+            ).rejects.toThrow("Failed to fetch data from airvisual api");
         });
     });
 });

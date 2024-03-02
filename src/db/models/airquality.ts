@@ -1,4 +1,9 @@
-import { DataTypes, Model } from "sequelize";
+import {
+    DataTypes,
+    FindAttributeOptions,
+    Model,
+    WhereOptions,
+} from "sequelize";
 
 import { sequelize } from "../connection";
 
@@ -59,6 +64,23 @@ export const createAirQualityRecord = async (
 
         await record.save();
         return record.get({ plain: true });
+    } catch (error) {
+        throw new Error("Could not create new AirQuality record");
+    }
+};
+
+export const fetchAirQualityRecord = async (
+    attributes: FindAttributeOptions,
+    condition: WhereOptions,
+): Promise<AirQuality | null> => {
+    try {
+        const record = await AirQuality.findOne({
+            attributes,
+            where: condition,
+            raw: true,
+        });
+
+        return record ?? null;
     } catch (error) {
         throw new Error("Could not create new AirQuality record");
     }

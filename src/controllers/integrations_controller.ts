@@ -1,6 +1,5 @@
 import "dotenv/config";
 import axios from "axios";
-import { getErrorMessage } from "../helpers";
 
 const AIRVISUAL_API_KEY: string | undefined = process.env.AIRVISUAL_API_KEY;
 const AIRVISUAL_HOST: string | undefined = process.env.AIRVISUAL_HOST;
@@ -36,8 +35,6 @@ export const fetchDataFromAirVisualApi = async (
 
         return response.data?.data || {};
     } catch (error) {
-        const message = getErrorMessage(error);
-
-        throw new Error(`Failed to fetch data from airvisual api, ${message}`);
+        throw new Error("Failed to fetch data from airvisual api");
     }
 };

@@ -25,8 +25,9 @@ export const sendApiResponse = (
 
 export const handleApiError = (res: Response, error: Error | unknown): void => {
     const message = getErrorMessage(error);
+    console.error(message);
     sendApiResponse(res, {
         status: 400,
-        errorMessage: `An error occurred: ${message}`,
+        errorMessage: `An error occurred while calling API ${error}`,
     });
 };

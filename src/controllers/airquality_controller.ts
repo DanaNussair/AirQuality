@@ -60,11 +60,11 @@ export const getMostPollutedByCity = async (req: Request, res: Response) => {
                 status: 200,
                 data: record,
             });
-        }
-        sendApiResponse(res, {
-            status: 404,
-            errorMessage: "Could not find record matching this criteria",
-        });
+        } else
+            sendApiResponse(res, {
+                status: 404,
+                errorMessage: "Could not find record matching this criteria",
+            });
     } catch (error) {
         handleApiError(res, error);
     }

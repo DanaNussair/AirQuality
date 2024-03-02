@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { fetchDataFromAirVisualApi } from "./integrations_controller";
 import AirQuality, { fetchAirQualityRecord } from "../db/models/airquality";
 import { handleApiError, sendApiResponse } from "./helpers";
+import { Sequelize } from "sequelize";
 
 export const getPollutionByCoordinates = async (
     req: Request,
@@ -46,10 +47,13 @@ export const getMostPollutedByCity = async (req: Request, res: Response) => {
             return;
         }
 
-        const record = await fetchAirQualityRecord(["ts"], {
-            city: String(city),
-            aqius: await AirQuality.max("aqius"),
-        });
+        const record = await fetchAirQualityRecord(
+            [[Sequelize.literal('"ts"'), "timestamp"]],
+            {
+                city: String(city),
+                aqius: await AirQuality.max("aqius"),
+            },
+        );
 
         if (record) {
             sendApiResponse(res, {
